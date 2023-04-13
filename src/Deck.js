@@ -1,18 +1,22 @@
 import React, { useRef, useEffect } from 'react';
 import { StyleSheet, View, Animated } from 'react-native';
 
-export default function Ball() {
+export default function Deck({ data, renderCard }) {
   const position = useRef(new Animated.ValueXY(0, 0)).current
   useEffect(() => {
-    Animated.spring(position, {
-      toValue: { x: 200, y: 500 }
-    }).start()
+
   }, [])
 
+  const renderCards = () => {
+    return data.map(item => {
+      return renderCard(item)
+    })
+  }
+
   return (
-    <Animated.View {...position.getLayout()}>
-      <View style={styles.ball} />
-    </Animated.View>
+    <View>
+      {renderCards()}
+    </View>
 
   );
 }
